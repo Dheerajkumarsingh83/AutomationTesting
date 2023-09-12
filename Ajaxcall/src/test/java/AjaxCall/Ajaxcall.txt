@@ -1,0 +1,140 @@
+How to Handle AJAX Calls in Selenium Webdriver
+================================================
+1.What is Ajax?
+Ans:AJAX stands for Asynchronous JavaScript & XML, and it allows the Web page to retrieve small amounts of data from 
+the server without reloading the entire page.
+Ajax is a technique used for creating fast and dynamic web pages. This technique is asynchronous and uses a combination
+ of Javascript and XML . It will updates the part/s of a web page without reloading the whole page. Some of the famous 
+ applications that uses AJAX technique are Gmail, Google Maps, Facebook, Youtube, etc.
+ 
+2. How Ajax Works?
+Ans:For example, when you click on submit button, JavaScript will make a request to the server, interpret the result
+ and update the current screen without reloading the webpage.
+1.An Ajax call is an asynchronous request initiated by the browser that does not directly result in a page transition. 
+It means, if you fire an Ajax request, the user can still work on the application while the request is waiting for a 
+response.
+2.AJAX sends HTTP requests from the client to server and then process the server’s response, without reloading the entire
+ page. So when you make an AJAX call, you are not pretty sure about the time taken by the server to send you a response.
+ 
+From a tester’s point of view, if you are checking the content or the element to be displayed , you need to wait till you
+ get the response. During AJAX call the data is stored in XML format and retrieved from the server.
+
+3.How to Handle Ajax Calls in Selenium Webdriver
+Ans:The biggest challenge in handling Ajax call is knowing the loading time for the web page. Since the loading of 
+the web page will last only for a fraction of seconds, it is difficult for the tester to test such application through
+ automation tool. For that, Selenium Webdriver has to use the wait method on this Ajax Call.
+
+So by executing this wait command, selenium will suspend the execution of current Test Case and wait for the expected 
+or new value. When the new value or field appears, the suspended test cases will get executed by Selenium Webdriver.
+
+Following are the wait methods that Selenium Webdriver can use
+
+Thread.Sleep()
+---------------
+*Thread.Sleep () is not a wise choice as it suspends the current thread for the specified amount of time.
+*In AJAX, you can never be sure about the exact wait time. So, your test will fail if the element won’t show up within 
+the wait time. Moreover, it increases the overhead because calling Thread.sleep(t) makes the current thread to be moved
+ from the running queue to the waiting queue.
+*After the time ‘t’ reached, the current thread will move from the waiting queue to the ready queue, and then it takes
+ some time to be picked by the CPU and be running.
+Implicit Wait()
+----------------
+*This method tells webdriver to wait if the element is not available immediately, but this wait will be in place for 
+the entire time the browser is open. So any search for the elements on the page could take the time the implicit wait
+ is set for.
+Explicit Wait()
+----------------
+*Explicit wait is used to freeze the test execution till the time a particular condition is met or maximum time lapses.
+WebdriverWait
+----------------
+*It can be used for any conditions. This can be achieved with WebDriverWait in combination with ExpectedCondition
+*The best way to wait for an element dynamically is checking for the condition every second and continuing to the next 
+command in the script as soon as the condition is met.
+
+But the problem with all these waits is, you have to mention the time out unit. What if the element is still not present
+ within the time? So there is one more wait called Fluent wait.
+
+Fluent Wait
+---------------
+*This is an implementation of the Wait interface having its timeout and polling interval. Each FluentWait instance 
+determines the maximum amount of time to wait for a condition, as well as the frequency with which to check the condition.
+
+4.Challenges in Handling Ajax Call in Selenium Webdriver
+ANS:*Using “pause” command for handling Ajax call is not completely reliable. Long pause time makes the test unacceptably
+ slow and increases the Testing time. Instead, “waitforcondition” will be more helpful in testing Ajax applications.
+*It is difficult to assess the risk associated with particular Ajax applications
+*Given full freedom to developers to modify Ajax application makes the testing process challenging
+*Creating automated test request may be difficult for testing tools as such AJAX application often use different 
+encoding or serialization technique to submit POST data.
+
+Code Example for Ajax HANDLING using Selenium Webdriver
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+public class Ajaxdemo {
+	
+	private String URL = "https://demo.guru99.com/test/ajax.html";
+	
+	WebDriver driver;
+	WebDriverWait wait;
+	
+	@BeforeClass
+	public void setUp() {
+		System.setProperty("webdriver.chrome.driver",".\\chromedriver.exe");
+		//create chrome instance
+		driver = new ChromeDriver();
+		driver.manage().window().maximize();
+		driver.navigate().to(URL);
+	}
+	
+	@Test
+	public void test_AjaxExample() {
+
+		By container = By.cssSelector(".container");
+		wait = new WebDriverWait(driver, 5);
+		wait.until(ExpectedConditions.presenceOfElementLocated(container));
+		
+		//Get the text before performing an ajax call
+		WebElement noTextElement = driver.findElement(By.className("radiobutton"));
+		String textBefore = noTextElement.getText().trim();
+		
+		//Click on the radio button
+		driver.findElement(By.id("yes")).click();
+	
+		//Click on Check Button
+		driver.findElement(By.id("buttoncheck")).click();
+		
+		/*Get the text after ajax call*/
+		WebElement TextElement = driver.findElement(By.className("radiobutton"));
+		wait.until(ExpectedConditions.visibilityOf(TextElement));
+		String textAfter = TextElement.getText().trim();
+		
+		/*Verify both texts before ajax call and after ajax call text.*/
+		Assert.assertNotEquals(textBefore, textAfter);
+		System.out.println("Ajax Call Performed");
+		
+		String expectedText = "Radio button is checked and it's value is Yes";
+		
+		/*Verify expected text with text updated after ajax call*/
+		Assert.assertEquals(textAfter, expectedText);
+		driver.close();
+	}
+	
+}
+Summary:
+AJAX allows the Web page to retrieve small amounts of data from the server without reloading the entire page.
+To test Ajax application, different wait methods should be applied
+ThreadSleep
+Implicit Wait
+Explicit Wait
+WebdriverWait
+Fluent Wait
+Creating automated test request may be difficult for testing tools as such AJAX application often use different 
+encoding or serialization technique to submit POST data.
