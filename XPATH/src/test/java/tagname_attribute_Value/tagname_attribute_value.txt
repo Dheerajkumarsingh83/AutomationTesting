@@ -1,0 +1,23 @@
+XPath Selenium Locators Strategies
+We can find the location of any element on a web page using XML path expressions. The basic syntax for XPath is
+ shown below:
+
+Syntax = //tagname[@attribute=’Value‘]
+
+Example = //img[@alt=’Onur Baskirt‘]
+
+You can also use class, and src attributes to locate an element with XPath, as shown above, but always check that 
+only one element has been found!
+
+Example:
+//input[@type='send text']
+
+//label[@id='clkBtn']
+
+//input[@value='SEND']
+
+//*[@class='swtestacademy'] --> "*" means, search "swtestacademy" class for all tags.
+
+//a[@href='http://www.swtestacademy.com/']
+
+//img[@src='cdn.medianova.com/images/img_59c4334feaa6d.png']

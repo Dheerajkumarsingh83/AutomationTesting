@@ -1,0 +1,13 @@
+Operator “or” in Xpath Selenium
+In this method, we use two interrogation conditions such as A and B, and return a result-set as shown below:
+
+A	B	Result
+False	False	No Element
+True	False	Returns A
+False	True	Returns B
+True	True	Returns Both
+“or” is case-sensitive, you should not use a capital “OR”.
+
+Syntax: //tag[XPath Statement-1 or XPath Statement-2]
+
+Example: //*[@id=’user-message’ or @class=’form-control’]

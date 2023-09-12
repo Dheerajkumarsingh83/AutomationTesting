@@ -1,0 +1,7 @@
+Starts-with Xpath Examples
+This method checks the starting text of an attribute. It is very handy when the attribute value changes dynamically,
+ but you can also use this method for non-changing attribute values.
+
+Syntax: //tag[starts-with(@attribute, ‘value‘)]
+
+Example: //img[starts-with(@alt,’Onur Ba’)]

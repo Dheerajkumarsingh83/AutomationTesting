@@ -1,0 +1,6 @@
+How to find XPath by Text 
+We can find an element with its exact text.
+
+Syntax: //tag[text()=’text value‘]
+
+Example://span[text()=’About Software Test Academy’]

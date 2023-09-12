@@ -1,0 +1,14 @@
+Contains XPath in Selenium
+It is a very handy XPath Selenium locator, and sometimes it saves the life of a test automation engineer. When an
+ attribute of an element is dynamic, you can use contains() for the constant part of the web element but also use
+  contains() in any condition when you need.
+
+Syntax: //tag[contains(@attribute, ‘value‘)]
+
+Example: //img[contains(@alt,’Baskirt’)]
+
+//*[contains(@name,'btnClk')] --> It searches "btnClk" for all name attributes in the DOM.
+
+//*[contains(text(),'here')] --> It searches the text "here" in the DOM.
+
+//*[contains(@href,'swtestacademy.com')] --> It searches "swtestacademy.com" link in the DOM.

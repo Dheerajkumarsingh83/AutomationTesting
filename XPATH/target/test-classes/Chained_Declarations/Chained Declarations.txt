@@ -1,0 +1,6 @@
+Chained Declarations XPath in Selenium
+We can chain multiple relative XPath declarations with “//” double slash to find an element location, as shown 
+below. We chained “//div” with “//span[text()=’About Software Test Academy’]’ in the below example.
+
+Example: //div//span[text()=’About Software Test Academy’]
+

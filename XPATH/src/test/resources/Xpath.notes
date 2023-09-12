@@ -1,0 +1,98 @@
+(1)Relative XPath
+span tag
+-----------
+Syntax: //span[text()=’TextnamePaste’]
+Example: //span[text()=’About Software Test Academy’]
+//span[normalize-space()=’About Software Test Academy’]
+
+div tag
+-----------
+Syntax: //div//span[text()=’TextnamePaste’]
+Example: //div//span[text()=’About Software Test Academy’]
+
+Tag-Attribute – Value 
+---------------------
+Syntax://tag[@attribute=’value‘]
+Example = //img[@alt=’Onur Baskirt‘]
+          //input[@type='send text']
+          //label[@id='clkBtn']
+          //input[@value='SEND']
+          //*[@class='swtestacademy'] --> "*" means, search "swtestacademy" class for all tags.
+          //a[@href='http://www.swtestacademy.com/']
+          //img[@src='cdn.medianova.com/images/img_59c4334feaa6d.png']
+
+Contains XPath in Selenium
+----------------------------
+Syntax: //tag[contains(@attribute, ‘value‘)]
+Example: //img[contains(@alt,’Baskirt’)]  
+         //*[contains(@name,'btnClk')] --> It searches "btnClk" for all name attributes in the DOM.
+         //*[contains(text(),'here')] --> It searches the text "here" in the DOM.
+         //*[contains(@href,'swtestacademy.com')] --> It searches "swtestacademy.com" link in the DOM.
+ 
+ Starts-with Xpath Examples
+ ---------------------------
+Syntax: //tag[starts-with(@attribute, ‘value‘)]
+Example: //img[starts-with(@alt,’Onur Ba’)]
+
+Chained Declarations XPath in Selenium
+----------------------------------------
+Example: //div//span[text()=’About Software Test Academy’]
+
+Operator “or” in Xpath Selenium
+--------------------------------
+Syntax: //tag[XPath Statement-1 or XPath Statement-2]
+Example: //*[@id=’user-message’ or @class=’form-control’]
+
+Operator “and” in Xpath Selenium
+----------------------------------
+Syntax: //tag[XPath Statement-1 and XPath Statement-2]
+Example: //*[@id=’user-message’ and @class=’form-control’]
+
+How to find XPath by Text 
+--------------------------
+Syntax: //tag[text()=’text value‘]
+Example://span[text()=’About Software Test Academy’]
+
+Ancestor Xpath Examples:It finds the element before the ancestor statement,
+sets it as a top node, and then starts finding elements in that node. In the below example,
+1- First, it finds the element whose XPath is //section[@id=’content’]
+2- Then, it starts to find all div elements in the node to which the above XPath belongs.
+------------------------------------------------------------------------------------------------
+Syntax: //section[@id=’content’]//ancestor::div
+Example://section[@id=’content’]//ancestor::div[1] – Returns 53 nodes
+        //section[@id=’content’]//ancestor::div[2]- Returns 33 nodes
+       //section[@id=’content’]//ancestor::div[3] – Returns 24 nodes
+       //section[@id=’content’]//ancestor::div[4]- Returns 19 nodes
+
+Following Xpath Selenium Examples
+-----------------------------------------
+Syntax://div[@class=’fusion-sliding-bar-wrapper’]
+Example: //div[@class=’fusion-sliding-bar-wrapper’]//following::section
+
+Child XPath in Selenium Examples
+---------------------------------
+Example: //nav[@class=’fusion-main-menu’]//ul[@id=’menu-main’]/child::li
+
+Preceding XPath Examples
+--------------------------
+Example: //div[@id=’wrapper’]/div[@class=’fusion-sliding-bar-wrapper’]//preceding::li
+
+Following-sibling XPath Examples
+--------------------------------
+Example: //*[@class=’col-md-6 text-left’]/child::div[2]//*[@class=’panel-body’]//following-sibling::li
+
+Descendant XPath Examples
+--------------------------
+Example: //nav[@class=’fusion-main-menu’]//*[@id=’menu-main’]//descendant::li
+
+Parent XPath Examples
+----------------------
+Example: .//*[@id=’get-input’]/button//parent::form
+
+Locate an Element inside an Array of Elements
+---------------------------------------------
+//span[contains(text(),’odamax’)]
+(//span[contains(text(),’odamax’)])[1]
+(//span[contains(text(),’odamax’)])[1]/following-sibling::strong[@class=’deals__price’]
+
+

@@ -1,0 +1,13 @@
+Operator “and” in Xpath Selenium
+In this method, we use two interrogation conditions such as A and B, and return a result-set as shown below:
+
+A	B	Result
+False	False	No Element
+True	False	No Element
+False	True	No Element
+True	True	Returns Both
+“and” is case-sensitive, you should not use the capital “AND”.
+
+Syntax: //tag[XPath Statement-1 and XPath Statement-2]
+
+Example: //*[@id=’user-message’ and @class=’form-control’]
